@@ -4,9 +4,9 @@ favicon: images/favicon.ico
 
 # Personal info
 name: Axel Lárusson
-title: Computer Scientist
-email: axelminn@email.co.uk
-website: www.github.com/axelminn
+title: Software Engineer
+email: axelminn@email.com
+# website: www.github.com/axelminn
 
 # Social links
 # twitter_username: facespics
@@ -24,9 +24,12 @@ linkedin_username: axellarusson
 # about_title: About Me
 about_profile_image: images/profil.jpg
 about_content: | # this will include new lines to allow paragraphs
-  Hi, my name's Brett and I'm a senior network system administrator. As well as administrating systems I also have experience making software and web apps. I have worked at a number of companies gaining teamwork and leadership skills.
 
-  I am most skilled in: <mark>AWS</mark> and <mark>Eating Pizza</mark>
+  Software Engineer inmy second year ofmy master’s studies at KTH in Stockholm. I also have 4 years working experience as a software engineer. Looking for a new
+  challenge where I can further enhance my skills and widen my knowledge in the field of software development.
+  
+  # Hi, my name's Brett and I'm a senior network system administrator. As well as administrating systems I also have experience making software and web apps. I have worked at a number of companies gaining teamwork and leadership skills.
+  # I am most skilled in: <mark>AWS</mark> and <mark>Eating Pizza</mark>
 
 # Projects Section
 # projects_title: Projects
@@ -41,10 +44,11 @@ about_content: | # this will include new lines to allow paragraphs
 # more_title: A Little More About Me
 more_content: | # this will include new lines to allow paragraphs
   Alongside my interests in networks and software engineering some of my other interests and hobbies are:
-   - Rock climbing
+   - Quality time with my family
+   - Football
+   - Movies
    - Gaming
    - Knitting
-   - [Becoming a ninja](https://www.youtube.com/watch?v=vtg4o__aRMg)
 
 # Footer
 footer_show_references: true
