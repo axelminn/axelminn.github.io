@@ -5,7 +5,7 @@ favicon: images/favicon.ico
 # Personal info
 name: Axel Lárusson
 title: Software Engineer
-email: axelminn@email.com
+email: axelminn@gmail.com
 # website: www.github.com/axelminn
 
 darkmode: true
@@ -30,7 +30,8 @@ about_content: | # this will include new lines to allow paragraphs
   Software Engineer inmy second year ofmy master’s studies at KTH in Stockholm. I also have 4 years working experience as a software engineer. Looking for a new
   challenge where I can further enhance my skills and widen my knowledge in the field of software development.
   
-  I am most skilled in: 
+  **Skills**
+  Programming Languages: 
     <mark>Java</mark>
     <mark>C</mark>
     <mark>Python</mark>
@@ -38,6 +39,26 @@ about_content: | # this will include new lines to allow paragraphs
     <mark>C#</mark>
     <mark>C++</mark>
     <mark>GO</mark>
+
+  Operating Systems: 
+    <mark>Windows</mark>
+    <mark>Manjaro</mark>
+    <mark>Ubuntu</mark>
+    <mark>Debian</mark>
+    <mark>FreeBSD</mark>
+  
+  Other: 
+    <mark>Git</mark>
+    <mark>SQL</mark>
+    <mark>PostgreSQL</mark>
+    <mark>ADABAS</mark>
+    <mark>Travis</mark>
+    <mark>Jenkins</mark>
+    <mark>LaTex</mark>
+    <mark>Docker</mark>
+    <mark>WebMethods</mark>
+    <mark>BPMS</mark>
+    
 
 # Projects Section
 # projects_title: Projects
