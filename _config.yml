@@ -21,17 +21,32 @@ linkedin_username: axellarusson
 # pinterest_username: jekyll
 # youtube_username: globalmtb
 # googleplus_username: +jekyll
+  
 
 # About Section
 # about_title: About Me
 about_profile_image: images/profil.jpg
 about_content: | # this will include new lines to allow paragraphs
 
-  Software Engineer inmy second year ofmy master’s studies at KTH in Stockholm. I also have 4 years working experience as a software engineer. Looking for a new
-  challenge where I can further enhance my skills and widen my knowledge in the field of software development.
+  Software Engineer in my second year of my master’s studies at KTH in Stockholm. I also have 4 years working experience as a software engineer. 
+  Looking for a new challenge where I can further enhance my skills and widen my knowledge in the field of software development. 
+
+
+# More Section
+more_title: Skills
+more_content: | # this will include new lines to allow paragraphs
   
-  **Skills**
-  Programming Languages: 
+  **Personal strenghts:** 
+    <mark>Hard-Working</mark>
+    <mark>Highly Adaptable</mark>
+    <mark>Great Social Skills</mark>
+    <mark>Creative</mark>
+    <mark>Resourceful</mark>
+    <mark>Confidant</mark>
+    <mark>Responsible</mark>
+    <mark>Reliable</mark>
+
+  **Programming Languages:** 
     <mark>Java</mark>
     <mark>C</mark>
     <mark>Python</mark>
@@ -40,14 +55,14 @@ about_content: | # this will include new lines to allow paragraphs
     <mark>C++</mark>
     <mark>GO</mark>
 
-  Operating Systems: 
+  **Operating Systems:** 
     <mark>Windows</mark>
     <mark>Manjaro</mark>
     <mark>Ubuntu</mark>
     <mark>Debian</mark>
     <mark>FreeBSD</mark>
-  
-  Other: 
+
+  **Other:** 
     <mark>Git</mark>
     <mark>SQL</mark>
     <mark>PostgreSQL</mark>
@@ -58,10 +73,12 @@ about_content: | # this will include new lines to allow paragraphs
     <mark>Docker</mark>
     <mark>WebMethods</mark>
     <mark>BPMS</mark>
-    
 
-# Skills Section
-# skills_title: Skills
+    **Languages:** 
+      <mark>Icelandic - Native language</mark>
+      <mark>English - Fluent (Proficient writing, reading and speaking)</mark>
+      <mark>Swedish - Intermediate High</mark>
+      <mark>Danish - Intermediate Mid</mark>
 
 # Experience Section
 # experience_title: Experience
@@ -70,20 +87,7 @@ about_content: | # this will include new lines to allow paragraphs
 # educaton_title: Education
 
 # Projects Section
-# projects_title: Projects
-
-# More Section
-# more_title: A Little More About Me
-more_content: | # this will include new lines to allow paragraphs
-  Alongside my interests in networks and software engineering some of my other interests and hobbies are:
-   - Quality time with my family
-   - Football
-   - Movies
-   - Gaming
-   - Knitting
-  This is where you can write a little more about yourself. You could title this section **Interests** and include some of your other interests.
-  Or you could title it **Skills** and write a bit more about things that make you more desirable, like *leadership* or *teamwork*
-
+projects_title: Extra
 
 # Footer
 footer_show_references: true

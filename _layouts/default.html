@@ -12,9 +12,7 @@
 
             {%- include about.html -%}
 
-            {%- if site.data.skills.size > 0 -%}
-                {%- include skills.html -%}
-            {%- endif -%}
+            {%- include more.html -%}
 
             {%- if site.data.experience.size > 0 -%}
                 {%- include experience.html -%}
@@ -28,7 +26,7 @@
                 {%- include projects.html -%}
             {%- endif -%}
 
-            {%- include more.html -%}
+            {% comment %} {%- include more.html -%} {% endcomment %}
 
         </div>
     </main>

@@ -1,8 +1,11 @@
 - layout: top-middle
-  name: Super awesome project
-  link: github.com/sproogen
-  github: sproogen/resume-theme
+  name: Links for more info
+  # link: github.com/sproogen
+  # github: sproogen/resume-theme
   quote: >
-    This is probably one of the greatest apps ever created, if you don't agree you're probably wrong.
+    Here are my CV and other links.
   description: | # this will include new lines to allow paragraphs
-    I started this project as a way if learning <mark>React</mark> and it has since grown into a fully fledged app. I have learned many skills through this and been I'm very proud of having this in my portfolio. If you don't have a project as awesome as this I would advise you make one.
+    Links:
+    - <a href="https://drive.google.com/file/d/1G8x7R634MWYUV78bRd9RHkFMlOxud2J1/view?usp=sharing">**CV and recommendation letter link**</a>
+    - <a href="https://drive.google.com/file/d/1tQQdE4DP_BcVLvun7IXXLs1qe5SH-Soj/view?usp=sharing">**Paper about DevOps and Agile**</a>
+    - <a href="https://sites.google.com/view/waitingwizards/home">**Computer game, school project**</a>
