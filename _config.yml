@@ -85,11 +85,11 @@ more_content: | # this will include new lines to allow paragraphs
     <mark>WebMethods</mark>
     <mark>BPMS</mark>
 
-    **Languages:** 
-      <mark>Icelandic - Native language</mark>
-      <mark>English - Fluent (Proficient writing, reading and speaking)</mark>
-      <mark>Swedish - Intermediate High</mark>
-      <mark>Danish - Intermediate Mid</mark>
+  **Languages:** 
+    <mark>Icelandic - Native language</mark>
+    <mark>English - Fluent (Proficient writing, reading and speaking)</mark>
+    <mark>Swedish - Intermediate High</mark>
+    <mark>Danish - Intermediate Mid</mark>
 
 # Experience Section
 # experience_title: Experience
