@@ -54,16 +54,27 @@ more_content: | # this will include new lines to allow paragraphs
     <mark>C#</mark>
     <mark>C++</mark>
     <mark>GO</mark>
+    <mark>Javascript</mark>
+    <mark>Clojure</mark>
+    <mark>HTML</mark>
+    <mark>CSS</mark>
+    <mark>Ruby</mark>
+    <mark>PHP</mark>
 
   **Operating Systems:** 
     <mark>Windows</mark>
+    <mark>Linux</mark>
     <mark>Manjaro</mark>
     <mark>Ubuntu</mark>
     <mark>Debian</mark>
+    <mark>Kali Linux</mark>
     <mark>FreeBSD</mark>
 
   **Other:** 
     <mark>Git</mark>
+    <mark>Microsoft Office 365</mark>
+    <mark>Agile</mark>
+    <mark>DevOps</mark>
     <mark>SQL</mark>
     <mark>PostgreSQL</mark>
     <mark>ADABAS</mark>
