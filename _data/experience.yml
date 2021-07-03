@@ -6,10 +6,10 @@
   quote: >
    My first job as a software developer. I worked for four years at Advania and it was a great place to learn and develop as a software developer. 
   description: | # this will include new lines to allow paragraphs
-  Support services administrator and DevOps engineer in EPPKI team in Ericsson, Kista.
-  Responsible for the support environment and infrastructure for EPPKI team.
-  Maintain the support environment, automate processes and synchronize between teams. 
-  Services include GitLab, Jira, Conflunece and more.
+    Support services administrator and DevOps engineer in EPPKI team in Ericsson, Kista.
+    Responsible for the support environment and infrastructure for EPPKI team.
+    Maintain the support environment, automate processes and synchronize between teams. 
+    Services include GitLab, Jira, Conflunece and more.
 
 - layout: left
   company: Advania 
