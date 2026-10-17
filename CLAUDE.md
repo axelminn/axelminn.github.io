@@ -6,6 +6,7 @@ Axel Lárusson's personal website and CV (infrastructure engineer). It is a stat
 
 - `index.html` — the whole site: markup, a `<style>` block in the head, and a `<script>` block at the end of the body.
 - `profile.jpg` — the profile photo, referenced by a relative path (`src="profile.jpg"`). Keep it next to `index.html`.
+- `README.md` — the public repo overview (features, structure, local run, deployment). Keep it in step with the site's sections and files.
 
 ## Page structure
 
