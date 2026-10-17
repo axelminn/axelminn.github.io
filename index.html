@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Axel Lárusson — Infrastructure Engineer</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9f8f6;
+      --surface: #ffffff;
+      --ink: #1a1a18;
+      --muted: #7a7870;
+      --accent: #2a5cff;
+      --accent-light: #eef1ff;
+      --border: #e8e6e0;
+      --card: #f2f1ef;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --mono: 'DM Mono', 'Courier New', monospace;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --shadow: 0 2px 16px rgba(0,0,0,0.06);
+    }
+
+    [data-theme="dark"] {
+      --bg: #111110;
+      --surface: #1a1a18;
+      --ink: #f0ede8;
+      --muted: #7a7870;
+      --accent: #5b7fff;
+      --accent-light: #1a2040;
+      --border: #2a2a28;
+      --card: #1e1e1c;
+      --shadow: 0 2px 16px rgba(0,0,0,0.3);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .container { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    nav .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .nav-logo { font-family: var(--mono); font-size: 13px; color: var(--muted); letter-spacing: 0.04em; text-decoration: none; flex-shrink: 0; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+
+    /* dark mode toggle */
+    .theme-btn {
+      background: none; border: 1px solid var(--border); border-radius: 20px;
+      padding: 5px 12px; cursor: pointer; display: flex; align-items: center; gap: 6px;
+      font-family: var(--mono); font-size: 11px; color: var(--muted);
+      letter-spacing: 0.04em; transition: border-color 0.2s, color 0.2s, background 0.2s;
+      white-space: nowrap;
+    }
+    .theme-btn:hover { border-color: var(--ink); color: var(--ink); }
+    .theme-icon { font-size: 13px; }
+
+    /* ── HERO ── */
+    #hero {
+      padding: 0;
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+
+    /* Large ambient background elements */
+    .hero-bg {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+    }
+    .hero-bg-circle {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle, color-mix(in srgb, var(--accent) 8%, transparent), transparent 70%);
+    }
+    .hero-bg-circle-1 { width: 700px; height: 700px; top: -200px; right: -200px; }
+    .hero-bg-circle-2 { width: 400px; height: 400px; bottom: 0; left: -100px; background: radial-gradient(circle, color-mix(in srgb, var(--accent) 5%, transparent), transparent 70%); }
+    .hero-bg-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.35;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+    }
+
+    .hero-inner {
+      position: relative; z-index: 2;
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 48px; align-items: end;
+      padding: 148px 32px 56px;
+      max-width: 760px; margin: 0 auto; width: 100%;
+    }
+
+    /* Photo */
+    .hero-photo-wrap { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .hero-photo {
+      width: 148px; height: 148px; border-radius: 50%;
+      border: 3px solid var(--border);
+      background: var(--card);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; position: relative;
+      box-shadow: 0 0 0 8px color-mix(in srgb, var(--accent) 8%, transparent);
+      transition: box-shadow 0.3s;
+    }
+    .hero-photo:hover { box-shadow: 0 0 0 12px color-mix(in srgb, var(--accent) 14%, transparent); }
+    .hero-photo img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transform: scale(1.06); transform-origin: 50% 40%;
+    }
+    .hero-photo-label { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; text-align: center; }
+
+    /* Tag / status */
+    .hero-tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); background: var(--accent-light); padding: 6px 14px; border-radius: 20px; margin-bottom: 28px; border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); }
+    .hero-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.75)} }
+
+    /* Name */
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(52px, 8vw, 84px);
+      line-height: 0.97; letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+    .hero-name em { font-style: italic; color: var(--muted); }
+
+    /* Animated role line */
+    .hero-role-line {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
+    }
+    .hero-role-prefix { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
+    .hero-role-text {
+      font-family: var(--mono); font-size: 13px; color: var(--ink); letter-spacing: 0.04em;
+      border-right: 2px solid var(--accent);
+      padding-right: 4px;
+      animation: blink-cursor 1s step-end infinite;
+      white-space: nowrap; overflow: hidden;
+    }
+    @keyframes blink-cursor { 0%,100%{border-color:var(--accent)} 50%{border-color:transparent} }
+
+    /* Bio */
+    .hero-bio {
+      max-width: 520px; font-size: 15.5px; font-weight: 300;
+      color: var(--muted); line-height: 1.9; margin-bottom: 36px;
+    }
+    .hero-bio strong { color: var(--ink); font-weight: 500; }
+
+    /* CTA buttons */
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--ink); color: var(--bg);
+      text-decoration: none; font-family: var(--mono); font-size: 12px;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 13px 26px; border-radius: 2px;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px color-mix(in srgb, var(--accent) 30%, transparent); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px; color: var(--muted);
+      text-decoration: none; font-family: var(--mono); font-size: 12px;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 13px 0; border-bottom: 1px solid var(--border);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
+
+    /* Stats bar */
+    .hero-meta {
+      position: relative; z-index: 2;
+      display: flex; flex-wrap: wrap;
+      border-top: 1px solid var(--border);
+      max-width: 760px; margin: 0 auto; width: 100%;
+    }
+    .hero-stat {
+      flex: 1; min-width: 140px;
+      display: flex; flex-direction: column; gap: 4px;
+      padding: 28px 32px;
+      border-right: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat:hover { background: var(--card); }
+    .hero-stat-num { font-family: var(--serif); font-size: 32px; line-height: 1; }
+    .hero-stat-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
+    .hero-stat-sub { font-size: 12px; font-weight: 300; color: var(--muted); margin-top: 2px; }
+
+    /* ── CURRENTLY ── */
+    #currently { padding: 48px 0; border-bottom: 1px solid var(--border); }
+    .currently-card {
+      position: relative; overflow: hidden;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 40px;
+    }
+    /* subtle dot-grid background */
+    .currently-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    /* accent glow top-left */
+    .currently-card::after {
+      content: '';
+      position: absolute; top: -60px; left: -60px;
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%);
+      pointer-events: none;
+    }
+    .currently-inner {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: start;
+    }
+    .currently-status {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: #22c55e; margin-bottom: 16px;
+    }
+    .currently-status-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: #22c55e;
+      box-shadow: 0 0 0 0 rgba(34,197,94,0.4);
+      animation: live-ping 2s ease-in-out infinite;
+    }
+    @keyframes live-ping {
+      0%  { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+      70% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+      100%{ box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+    }
+    .currently-role {
+      font-family: var(--serif); font-size: 26px; letter-spacing: -0.02em;
+      line-height: 1.15; margin-bottom: 6px;
+    }
+    .currently-company {
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em;
+      color: var(--accent); text-transform: uppercase; margin-bottom: 16px;
+    }
+    .currently-desc {
+      font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.85; max-width: 480px;
+    }
+    .currently-stack { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px; }
+    .currently-stack .tag {
+      background: var(--bg); border-color: var(--border);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .currently-stack .tag:hover { border-color: var(--accent); color: var(--accent); }
+    .currently-meta {
+      display: flex; flex-direction: column; gap: 16px; align-items: flex-end;
+      flex-shrink: 0;
+    }
+    .currently-tenure {
+      text-align: right;
+    }
+    .currently-tenure-num {
+      font-family: var(--serif); font-size: 36px; line-height: 1; color: var(--ink);
+    }
+    .currently-tenure-label {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted); display: block; margin-top: 4px;
+    }
+    .currently-location {
+      font-family: var(--mono); font-size: 11px; color: var(--muted);
+      letter-spacing: 0.04em; text-align: right;
+    }
+    @media (max-width: 600px) {
+      .currently-inner { grid-template-columns: 1fr; }
+      .currently-meta { align-items: flex-start; flex-direction: row; gap: 24px; }
+      .currently-tenure, .currently-location { text-align: left; }
+      .currently-card { padding: 24px; }
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 72px 0; border-bottom: 1px solid var(--border); }
+    .section-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 48px; }
+    .section-number { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.06em; }
+    .section-title { font-family: var(--serif); font-size: 32px; letter-spacing: -0.01em; }
+
+    /* ── EXPERIENCE ── */
+    .exp-list {
+      display: flex; flex-direction: column;
+      position: relative; padding-left: 32px;
+    }
+    /* vertical timeline line */
+    .exp-list::before {
+      content: ''; position: absolute;
+      left: 11px; top: 8px; bottom: 8px;
+      width: 1px; background: var(--border);
+    }
+    .exp-item {
+      position: relative;
+      padding: 0 0 40px 32px;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .exp-item:last-child { padding-bottom: 0; }
+    .exp-item.visible { opacity: 1; transform: translateY(0); }
+
+    /* timeline dot */
+    .exp-dot {
+      position: absolute; left: -32px; top: 4px;
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--bg); border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: 8px; font-weight: 500;
+      color: var(--muted); letter-spacing: 0;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
+      z-index: 1;
+    }
+    .exp-item:hover .exp-dot {
+      border-color: var(--accent); background: var(--accent);
+      color: #fff;
+    }
+
+    /* card */
+    .exp-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 4px; padding: 24px 28px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .exp-item:hover .exp-card {
+      border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+
+    .exp-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 4px; }
+    .exp-role { font-family: var(--serif); font-size: 19px; letter-spacing: -0.01em; line-height: 1.2; }
+    .exp-duration {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.05em;
+      color: var(--bg); background: var(--muted);
+      padding: 3px 9px; border-radius: 20px; white-space: nowrap;
+      flex-shrink: 0; margin-top: 3px;
+      transition: background 0.2s;
+    }
+    .exp-item:hover .exp-duration { background: var(--accent); }
+
+    .exp-meta-row {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;
+    }
+    .exp-company { font-family: var(--mono); font-size: 11px; letter-spacing: 0.05em; color: var(--accent); text-transform: uppercase; }
+    .exp-sep { color: var(--border); font-size: 12px; }
+    .exp-period { font-family: var(--mono); font-size: 11px; letter-spacing: 0.03em; color: var(--muted); }
+
+    .exp-desc { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.85; }
+    .exp-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+    .tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border); background: var(--bg); padding: 3px 9px; border-radius: 2px; transition: border-color 0.2s, color 0.2s; }
+    .tag:hover { border-color: var(--accent); color: var(--accent); }
+    /* pill tags inside experience cards */
+    .exp-tags .tag {
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 10px;
+      background: var(--bg);
+      text-transform: none;
+      letter-spacing: 0.03em;
+    }
+    .exp-tags .tag:hover { background: var(--accent-light); }
+
+    /* multiple roles at one company: mini timeline inside the card */
+    .exp-roles {
+      position: relative; margin-top: 18px; padding-left: 22px;
+      display: flex; flex-direction: column; gap: 24px;
+    }
+    .exp-roles::before {
+      content: ''; position: absolute;
+      left: 4px; top: 8px; bottom: 8px;
+      width: 1px; background: var(--border);
+    }
+    .exp-subrole { position: relative; }
+    .exp-subrole::before {
+      content: ''; position: absolute;
+      left: -22px; top: 7px;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--card); border: 2px solid var(--muted);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .exp-subrole:hover::before { border-color: var(--accent); background: var(--accent); }
+    .exp-subrole-header {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 6px 16px; flex-wrap: wrap; margin-bottom: 8px;
+    }
+    .exp-subrole-title { font-family: var(--serif); font-size: 17px; letter-spacing: -0.01em; line-height: 1.25; }
+    .exp-subrole-period { font-family: var(--mono); font-size: 11px; letter-spacing: 0.03em; color: var(--muted); white-space: nowrap; }
+
+    /* ── SKILLS ── */
+    .skills-spotlight {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px;
+    }
+    .skill-featured {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--ink); color: var(--bg);
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em;
+      padding: 9px 16px; border-radius: 24px;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      cursor: default;
+    }
+    .skill-featured:hover { background: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 30%, transparent); }
+    .skill-featured .sf-icon { font-size: 15px; }
+
+    .skills-categories { display: flex; flex-direction: column; gap: 28px; }
+    .skill-cat {}
+    .skill-cat-header {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+    }
+    .skill-cat-icon { font-size: 16px; }
+    .skill-cat-name {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .skill-cat-line { flex: 1; height: 1px; background: var(--border); }
+    .skill-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--ink);
+      font-family: var(--sans); font-size: 13px; font-weight: 400;
+      padding: 7px 14px; border-radius: 20px;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s, color 0.2s;
+      cursor: default;
+    }
+    .skill-chip:hover {
+      border-color: var(--accent); color: var(--accent);
+      background: var(--accent-light); transform: translateY(-1px);
+    }
+    .skill-chip .sc-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: currentColor; opacity: 0.5; flex-shrink: 0;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-list {
+      display: flex; flex-direction: column;
+      position: relative; padding-left: 32px;
+      margin-bottom: 48px;
+    }
+    .edu-list::before {
+      content: ''; position: absolute;
+      left: 11px; top: 8px; bottom: 8px;
+      width: 1px; background: var(--border);
+    }
+    .edu-item {
+      position: relative; padding: 0 0 32px 32px;
+      opacity: 0; transform: translateY(12px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .edu-item.visible { opacity: 1; transform: translateY(0); }
+    .edu-item:last-child { padding-bottom: 0; }
+    .edu-dot {
+      position: absolute; left: -32px; top: 4px;
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--bg); border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; z-index: 1;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .edu-item:hover .edu-dot { border-color: var(--accent); background: var(--accent-light); }
+    .edu-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 4px; padding: 24px 28px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .edu-item:hover .edu-card {
+      border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+    .edu-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 4px; }
+    .edu-degree { font-family: var(--serif); font-size: 19px; letter-spacing: -0.01em; line-height: 1.2; }
+    .edu-badge {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.05em;
+      color: var(--bg); background: var(--muted);
+      padding: 3px 9px; border-radius: 20px; white-space: nowrap;
+      flex-shrink: 0; margin-top: 3px;
+      transition: background 0.2s;
+    }
+    .edu-item:hover .edu-badge { background: var(--accent); }
+    .edu-meta-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+    .edu-school { font-family: var(--mono); font-size: 11px; letter-spacing: 0.05em; color: var(--accent); text-transform: uppercase; }
+    .edu-sep { color: var(--border); font-size: 12px; }
+    .edu-year { font-family: var(--mono); font-size: 11px; letter-spacing: 0.03em; color: var(--muted); }
+    .edu-detail { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.8; }
+
+    /* ── LANGUAGES ── */
+    .lang-section-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+    .lang-section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .lang-list { display: flex; gap: 12px; flex-wrap: wrap; }
+    .lang-item {
+      flex: 1; min-width: 140px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 4px;
+      padding: 20px 24px; display: flex; flex-direction: column; gap: 6px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .lang-item:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--border)); box-shadow: 0 4px 16px rgba(0,0,0,0.05); }
+    .lang-flag { font-size: 22px; line-height: 1; margin-bottom: 4px; }
+    .lang-name { font-family: var(--serif); font-size: 17px; }
+    .lang-level { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.04em; }
+    .lang-bar { height: 2px; background: var(--border); border-radius: 1px; margin-top: 8px; overflow: hidden; }
+    .lang-fill { height: 100%; background: var(--accent); border-radius: 1px; width: 0; transition: width 1s cubic-bezier(0.16,1,0.3,1); }
+
+    /* ── INTERESTS ── */
+    #interests { padding: 72px 0; border-bottom: 1px solid var(--border); }
+    .values-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 4px; overflow: hidden;
+    }
+    .value {
+      background: var(--bg); padding: 32px 32px 30px;
+      display: flex; flex-direction: column;
+      transition: background 0.2s;
+    }
+    .value:hover { background: var(--card); }
+    .value-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+    .value-icon {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--border); color: var(--ink);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .value-icon svg { width: 18px; height: 18px; }
+    .value:hover .value-icon { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+    .value-num { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--muted); }
+    .value-title { font-family: var(--serif); font-size: 22px; letter-spacing: -0.015em; line-height: 1.2; margin-bottom: 10px; }
+    .value-desc { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.8; flex: 1; }
+    .value-tags {
+      margin-top: 18px; font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent);
+    }
+    @media (max-width: 640px) {
+      .values-grid { grid-template-columns: 1fr; }
+      .value { padding: 26px 22px; }
+    }
+
+    /* ── CONTACT ── */
+    #contact { border-bottom: none; padding-bottom: 100px; }
+    .contact-intro { font-family: var(--serif); font-size: clamp(26px, 4vw, 38px); line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 40px; max-width: 480px; }
+    .contact-links { display: flex; flex-direction: column; max-width: 420px; }
+    .contact-link { display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: var(--ink); padding: 18px 0; border-bottom: 1px solid var(--border); transition: color 0.2s; }
+    .contact-link:hover { color: var(--accent); }
+    .contact-link-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); width: 80px; }
+    .contact-link-value { font-size: 14px; flex: 1; padding-left: 16px; }
+    .contact-link-arrow { font-size: 16px; }
+
+    /* ── FOOTER ── */
+    footer { padding: 28px 0; border-top: 1px solid var(--border); }
+    footer .container { display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.04em; }
+
+    /* ── BACK TO TOP ── */
+    .back-to-top {
+      position: fixed; bottom: 32px; right: 32px; z-index: 99;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--ink); color: var(--bg);
+      border: none; cursor: pointer; font-size: 18px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow);
+      opacity: 0; pointer-events: none;
+      transform: translateY(8px);
+      transition: opacity 0.3s, transform 0.3s, background 0.2s;
+    }
+    .back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .back-to-top:hover { background: var(--accent); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-tag     { animation: fadeUp 0.6s ease 0.1s both; }
+    .hero-name    { animation: fadeUp 0.6s ease 0.2s both; }
+    .hero-title   { animation: fadeUp 0.6s ease 0.3s both; }
+    .hero-bio     { animation: fadeUp 0.6s ease 0.4s both; }
+    .hero-actions { animation: fadeUp 0.6s ease 0.5s both; }
+    .hero-meta    { animation: fadeUp 0.6s ease 0.65s both; }
+    .hero-photo-wrap { animation: fadeUp 0.6s ease 0.15s both; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .container { padding: 0 20px; }
+      .exp-item, .edu-item { grid-template-columns: 1fr; gap: 6px; }
+      .nav-links { display: none; }
+      .hero-inner { grid-template-columns: 1fr; padding: 120px 20px 40px; }
+      .hero-photo-wrap { order: -1; }
+      .hero-photo { width: 100px; height: 100px; }
+      .hero-name { font-size: clamp(44px, 12vw, 64px); }
+      .hero-meta { flex-direction: row; }
+      .hero-stat { min-width: 50%; border-bottom: 1px solid var(--border); padding: 20px; }
+      .hero-stat:nth-child(even) { border-right: none; }
+      .currently-inner { grid-template-columns: 1fr; }
+      .currently-meta { align-items: flex-start; flex-direction: row; gap: 24px; }
+      .currently-card { padding: 24px; }
+      .back-to-top { bottom: 20px; right: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="container">
+      <a class="nav-logo" href="#hero">AL<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="#currently">Now</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="theme-btn" id="themeToggle" aria-label="Toggle dark mode">
+          <span class="theme-icon" id="themeIcon">🌙</span>
+          <span id="themeLabel">Dark</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <!-- Background decoration -->
+    <div class="hero-bg">
+      <div class="hero-bg-grid"></div>
+      <div class="hero-bg-circle hero-bg-circle-1"></div>
+      <div class="hero-bg-circle hero-bg-circle-2"></div>
+    </div>
+
+    <!-- Main content -->
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span class="hero-tag-dot"></span>
+          Open to new opportunities
+        </div>
+        <h1 class="hero-name">Axel<br><em>Lárusson</em></h1>
+        <div class="hero-role-line">
+          <span class="hero-role-prefix">Currently:</span>
+          <span class="hero-role-text" id="heroRole">Infrastructure Engineer at Swedbank</span>
+        </div>
+        <p class="hero-bio">
+          <strong>Infrastructure &amp; Platform Engineer</strong> with 10+ years across software
+          development, DevOps and platform engineering in finance, telecom and the public sector.
+          I build and run container platforms on Kubernetes and OpenShift, with a focus on
+          automation, reliability and developer experience. A background in both computer science
+          and business, plus experience leading people and projects, helps me connect technical
+          work to the goals of the organisation.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">Get in touch →</a>
+          <a href="#experience" class="btn-ghost">View experience</a>
+        </div>
+      </div>
+      <div class="hero-photo-wrap">
+        <div class="hero-photo">
+          <img src="profile.jpg" alt="Axel Lárusson" width="148" height="148">
+        </div>
+        <div class="hero-photo-label">Stockholm, SE</div>
+      </div>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="hero-meta">
+      <div class="hero-stat">
+        <span class="hero-stat-num">10+</span>
+        <span class="hero-stat-label">Years in tech</span>
+        <span class="hero-stat-sub">Software · Platform · Infrastructure · AI · Cloud</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">4</span>
+        <span class="hero-stat-label">Industries</span>
+        <span class="hero-stat-sub">Finance · Telecom · Public sector · IT services</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">2</span>
+        <span class="hero-stat-label">Fields of study</span>
+        <span class="hero-stat-sub">Computer Science · Business &amp; Economics</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">4</span>
+        <span class="hero-stat-label">Core values</span>
+        <span class="hero-stat-sub">Family · Active life · Tech · Optimism</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURRENTLY -->
+  <section id="currently">
+    <div class="container">
+      <div class="currently-card">
+        <div class="currently-inner">
+          <div class="currently-left">
+            <div class="currently-status">
+              <span class="currently-status-dot"></span>
+              Currently
+            </div>
+            <div class="currently-role">Infrastructure Engineer</div>
+            <div class="currently-company">Swedbank · Stockholm</div>
+            <p class="currently-desc">
+              Building and maintaining the Container Platform that powers internal services across one of Scandinavia's largest banks.
+              Day-to-day work spans managing Kubernetes &amp; OpenShift clusters, building automation and Infrastructure as Code,
+              and evolving the platform's developer experience.
+            </p>
+            <div class="currently-stack">
+              <span class="tag">OpenShift</span>
+              <span class="tag">Kubernetes</span>
+              <span class="tag">Linux</span>
+              <span class="tag">Git</span>
+              <span class="tag">CI/CD</span>
+              <span class="tag">Automation</span>
+              <span class="tag">Platform Engineering</span>
+            </div>
+          </div>
+          <div class="currently-meta">
+            <div class="currently-tenure">
+              <div class="currently-tenure-num">3+</div>
+              <span class="currently-tenure-label">Years here</span>
+            </div>
+            <div class="currently-location">📍 Stockholm<br>Sweden</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">01</span>
+        <h2 class="section-title">Experience</h2>
+      </div>
+      <div class="exp-list">
+
+        <div class="exp-item">
+          <div class="exp-dot">SW</div>
+          <div class="exp-card">
+            <div class="exp-header">
+              <div class="exp-role">Swedbank</div>
+              <span class="exp-duration">3 yrs</span>
+            </div>
+            <div class="exp-meta-row">
+              <span class="exp-period">May 2023 — Present</span>
+              <span class="exp-sep">·</span>
+              <span class="exp-period">Stockholm, Sweden</span>
+            </div>
+
+            <div class="exp-roles">
+              <div class="exp-subrole">
+                <div class="exp-subrole-header">
+                  <div class="exp-subrole-title">Infrastructure Engineer</div>
+                  <span class="exp-subrole-period">May 2023 — Present · 3 yrs</span>
+                </div>
+                <p class="exp-desc">Responsible for the design, development, and operation of the internal Container Platform serving engineering teams across one of Scandinavia's largest financial institutions. Core responsibilities include managing production-grade Kubernetes clusters — including OpenShift and AKS deployments — building automation pipelines using Bash, Terraform, Tekton, and GitHub Actions, and continuously improving platform reliability, security, and developer experience through Infrastructure as Code.</p>
+                <div class="exp-tags">
+                  <span class="tag">Kubernetes</span><span class="tag">OpenShift</span><span class="tag">AKS</span><span class="tag">Linux</span><span class="tag">Terraform</span><span class="tag">Bash</span><span class="tag">Tekton</span><span class="tag">GitHub Actions</span><span class="tag">CI/CD</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-dot">ER</div>
+          <div class="exp-card">
+            <div class="exp-header">
+              <div class="exp-role">Ericsson</div>
+              <span class="exp-duration">3 yrs</span>
+            </div>
+            <div class="exp-meta-row">
+              <span class="exp-company">2 roles</span>
+              <span class="exp-sep">·</span>
+              <span class="exp-period">Jul 2020 — Jun 2023</span>
+              <span class="exp-sep">·</span>
+              <span class="exp-period">Stockholm, Sweden</span>
+            </div>
+
+            <div class="exp-roles">
+              <div class="exp-subrole">
+                <div class="exp-subrole-header">
+                  <div class="exp-subrole-title">Technical Project Manager</div>
+                  <span class="exp-subrole-period">Jun 2022 — Jun 2023 · 1 yr</span>
+                </div>
+                <p class="exp-desc">Transitioned into a cross-functional leadership role within Ericsson's Baseband Infrastructure (BBI) organisation, coordinating improvement projects across globally distributed engineering teams developing cross-platform mobile network solutions. Drove continuous improvement initiatives spanning feasibility studies, development, and deployment — supporting Ericsson's global 5G rollout and advancing ways of working across international teams.</p>
+                <div class="exp-tags">
+                  <span class="tag">5G</span><span class="tag">Mobile Networks</span><span class="tag">Agile</span><span class="tag">Project Management</span><span class="tag">Cross-functional Leadership</span><span class="tag">Global Teams</span><span class="tag">Continuous Improvement</span>
+                </div>
+              </div>
+
+              <div class="exp-subrole">
+                <div class="exp-subrole-header">
+                  <div class="exp-subrole-title">DevOps Engineer</div>
+                  <span class="exp-subrole-period">Jul 2020 — Jun 2022 · 2 yrs</span>
+                </div>
+                <p class="exp-desc">Owned the full support environment and infrastructure for the Ericsson Product Public Key Infrastructure (EPPKI) team — a critical internal security function. Delivered automation solutions to reduce manual overhead, managed VMware-based infrastructure, and drove networking and security improvements across the environment. Served as the key liaison between engineering, security, and operations teams.</p>
+                <div class="exp-tags">
+                  <span class="tag">Linux</span><span class="tag">VMware</span><span class="tag">Networking</span><span class="tag">Security</span><span class="tag">Bash</span><span class="tag">GitLab CI</span><span class="tag">Jira</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-dot">AD</div>
+          <div class="exp-card">
+            <div class="exp-header">
+              <div class="exp-role">Advania</div>
+              <span class="exp-duration">4 yrs</span>
+            </div>
+            <div class="exp-meta-row">
+              <span class="exp-company">2 roles</span>
+              <span class="exp-sep">·</span>
+              <span class="exp-period">Feb 2015 — Jan 2019</span>
+              <span class="exp-sep">·</span>
+              <span class="exp-period">Reykjavík, Iceland</span>
+            </div>
+
+            <div class="exp-roles">
+              <div class="exp-subrole">
+                <div class="exp-subrole-header">
+                  <div class="exp-subrole-title">Software Developer</div>
+                  <span class="exp-subrole-period">Feb 2015 — Jan 2019 · 4 yrs</span>
+                </div>
+                <p class="exp-desc">Full-stack developer on the State Revenue Accounting System (TBR) — one of Iceland's largest custom-built software systems, in continuous operation since 1999.</p>
+                <div class="exp-tags">
+                  <span class="tag">Full Stack</span><span class="tag">C</span><span class="tag">Adabas</span><span class="tag">Enterprise Software</span><span class="tag">System Maintenance</span><span class="tag">Agile</span><span class="tag">Software Development</span>
+                </div>
+              </div>
+
+              <div class="exp-subrole">
+                <div class="exp-subrole-header">
+                  <div class="exp-subrole-title">CEO, Staff Union</div>
+                  <span class="exp-subrole-period">Feb 2016 — Feb 2018 · 2 yrs · alongside developer role</span>
+                </div>
+                <p class="exp-desc">Served as Head of the Advania Iceland Staff Union while continuing full-time as a Software Developer — overseeing 20+ employee committees with approximately 80 active volunteers. Championed employee wellbeing and company culture, and directed large-scale events including the company Annual Event with over 1,000 attendees.</p>
+                <div class="exp-tags">
+                  <span class="tag">Leadership</span><span class="tag">People Management</span><span class="tag">Stakeholder Communication</span><span class="tag">Culture &amp; Engagement</span><span class="tag">Event Management</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-dot">FN</div>
+          <div class="exp-card">
+            <div class="exp-header">
+              <div class="exp-role">Fótbolti.net</div>
+              <span class="exp-duration">3 yrs</span>
+            </div>
+            <div class="exp-meta-row">
+              <span class="exp-period">Jan 2013 — Jan 2016</span>
+              <span class="exp-sep">·</span>
+              <span class="exp-period">Reykjavík, Iceland</span>
+            </div>
+
+            <div class="exp-roles">
+              <div class="exp-subrole">
+                <div class="exp-subrole-header">
+                  <div class="exp-subrole-title">Marketing Coordinator</div>
+                  <span class="exp-subrole-period">Jan 2013 — Jan 2016 · 3 yrs</span>
+                </div>
+                <p class="exp-desc">Handled external marketing and advertising sales for Fótbolti.net, Iceland's leading football news platform. Responsible for acquiring and managing ad clients, coordinating campaigns, and driving commercial revenue through digital and social media channels.</p>
+                <div class="exp-tags">
+                  <span class="tag">Ad Sales</span><span class="tag">Client Management</span><span class="tag">Campaign Coordination</span><span class="tag">Digital Marketing</span><span class="tag">Social Media</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">02</span>
+        <h2 class="section-title">Skills</h2>
+      </div>
+
+      <!-- Spotlight: top skills shown as bold dark pills -->
+      <div class="skills-spotlight">
+        <span class="skill-featured"><span class="sf-icon">☸️</span> Kubernetes</span>
+        <span class="skill-featured"><span class="sf-icon">🐧</span> Linux</span>
+        <span class="skill-featured"><span class="sf-icon">🤖</span> AI &amp; Agentic Programming</span>
+        <span class="skill-featured"><span class="sf-icon">🔧</span> OpenShift</span>
+        <span class="skill-featured"><span class="sf-icon">⚙️</span> CI/CD</span>
+        <span class="skill-featured"><span class="sf-icon">🔁</span> Automation</span>
+        <span class="skill-featured"><span class="sf-icon">📜</span> Infrastructure as Code</span>
+      </div>
+
+      <!-- Category rows -->
+      <div class="skills-categories">
+
+        <div class="skill-cat">
+          <div class="skill-cat-header">
+            <span class="skill-cat-icon">🏗️</span>
+            <span class="skill-cat-name">Infrastructure & Cloud</span>
+            <div class="skill-cat-line"></div>
+          </div>
+          <div class="skill-chips">
+            <span class="skill-chip"><span class="sc-dot"></span>Kubernetes</span>
+            <span class="skill-chip"><span class="sc-dot"></span>OpenShift</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Terraform</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Docker</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Helm</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Linux</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Networking</span>
+            <span class="skill-chip"><span class="sc-dot"></span>AWS / Azure / GCP</span>
+            <span class="skill-chip"><span class="sc-dot"></span>ArgoCD</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Istio / Service Mesh</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Azure Kubernetes Service (AKS)</span>
+            <span class="skill-chip"><span class="sc-dot"></span>VMware</span>
+            <span class="skill-chip"><span class="sc-dot"></span>GitOps</span>
+          </div>
+        </div>
+
+        <div class="skill-cat">
+          <div class="skill-cat-header">
+            <span class="skill-cat-icon">⚡</span>
+            <span class="skill-cat-name">DevOps & Automation</span>
+            <div class="skill-cat-line"></div>
+          </div>
+          <div class="skill-chips">
+            <span class="skill-chip"><span class="sc-dot"></span>Git</span>
+            <span class="skill-chip"><span class="sc-dot"></span>GitLab CI</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Bash / Shell</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Ansible</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Jira</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Confluence</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Monitoring &amp; Observability</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Prometheus &amp; Grafana</span>
+            <span class="skill-chip"><span class="sc-dot"></span>GitHub Actions</span>
+            <span class="skill-chip"><span class="sc-dot"></span>HashiCorp Vault</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Tekton</span>
+          </div>
+        </div>
+
+        <div class="skill-cat">
+          <div class="skill-cat-header">
+            <span class="skill-cat-icon">💻</span>
+            <span class="skill-cat-name">Programming</span>
+            <div class="skill-cat-line"></div>
+          </div>
+          <div class="skill-chips">
+            <span class="skill-chip"><span class="sc-dot"></span>Python</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Bash</span>
+            <span class="skill-chip"><span class="sc-dot"></span>YAML / JSON</span>
+            <span class="skill-chip"><span class="sc-dot"></span>REST APIs</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Go</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Infrastructure as Code (IaC)</span>
+          </div>
+        </div>
+
+        <div class="skill-cat">
+          <div class="skill-cat-header">
+            <span class="skill-cat-icon">🤖</span>
+            <span class="skill-cat-name">AI & Emerging Tech</span>
+            <div class="skill-cat-line"></div>
+          </div>
+          <div class="skill-chips">
+            <span class="skill-chip"><span class="sc-dot"></span>AI Integration</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Agentic Programming</span>
+            <span class="skill-chip"><span class="sc-dot"></span>LLM APIs</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Prompt Engineering</span>
+            <span class="skill-chip"><span class="sc-dot"></span>AI-assisted DevOps</span>
+            <span class="skill-chip"><span class="sc-dot"></span>MLOps</span>
+          </div>
+        </div>
+
+        <div class="skill-cat">
+          <div class="skill-cat-header">
+            <span class="skill-cat-icon">🧠</span>
+            <span class="skill-cat-name">Leadership & Practices</span>
+            <div class="skill-cat-line"></div>
+          </div>
+          <div class="skill-chips">
+            <span class="skill-chip"><span class="sc-dot"></span>Agile / Scrum</span>
+            <span class="skill-chip"><span class="sc-dot"></span>System Design</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Team Leadership</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Technical Project Management</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Stakeholder Communication</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Documentation</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Incident Management</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Platform Engineering</span>
+            <span class="skill-chip"><span class="sc-dot"></span>Security / DevSecOps</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">03</span>
+        <h2 class="section-title">Education</h2>
+      </div>
+      <div class="edu-list">
+
+        <div class="edu-item">
+          <div class="edu-dot">🎓</div>
+          <div class="edu-card">
+            <div class="edu-header">
+              <div class="edu-degree">M.Sc. Computer Science</div>
+              <span class="edu-badge">Master's</span>
+            </div>
+            <div class="edu-meta-row">
+              <span class="edu-school">KTH Royal Institute of Technology</span>
+              <span class="edu-sep">·</span>
+              <span class="edu-year">2018 — 2023</span>
+              <span class="edu-sep">·</span>
+              <span class="edu-year">Stockholm</span>
+            </div>
+            <p class="edu-detail">Undertook advanced graduate studies in Computer Science at one of Europe's leading technical universities, completing over 90 credits with a focus on software development, distributed systems, and AI. Thesis remaining to finalise the degree — representing a near-complete Master's programme with deep technical breadth across modern software engineering disciplines.</p>
+          </div>
+        </div>
+
+        <div class="edu-item">
+          <div class="edu-dot">📖</div>
+          <div class="edu-card">
+            <div class="edu-header">
+              <div class="edu-degree">B.Sc. Computer Science</div>
+              <span class="edu-badge">Bachelor's</span>
+            </div>
+            <div class="edu-meta-row">
+              <span class="edu-school">Háskóli Íslands — University of Iceland</span>
+              <span class="edu-sep">·</span>
+              <span class="edu-year">2013 — 2016</span>
+              <span class="edu-sep">·</span>
+              <span class="edu-year">Reykjavík</span>
+            </div>
+            <p class="edu-detail">Completed a Bachelor's degree in Computer Science, establishing core engineering fundamentals across software development, networking, and systems design — building the technical foundation that underpins a professional career in software and infrastructure engineering.</p>
+          </div>
+        </div>
+
+        <div class="edu-item">
+          <div class="edu-dot">📊</div>
+          <div class="edu-card">
+            <div class="edu-header">
+              <div class="edu-degree">B.Sc. Business &amp; Managerial Economics</div>
+              <span class="edu-badge">Bachelor's</span>
+            </div>
+            <div class="edu-meta-row">
+              <span class="edu-school">Háskóli Íslands — University of Iceland</span>
+              <span class="edu-sep">·</span>
+              <span class="edu-year">2009 — 2013</span>
+              <span class="edu-sep">·</span>
+              <span class="edu-year">Reykjavík</span>
+            </div>
+            <p class="edu-detail">Completed a Bachelor's degree in Business and Managerial Economics — gaining a solid grounding in economics, organisational theory, and project management that has proven complementary throughout a career at the intersection of technology and business.</p>
+          </div>
+        </div>
+
+        <div class="edu-item">
+          <div class="edu-dot">🏫</div>
+          <div class="edu-card">
+            <div class="edu-header">
+              <div class="edu-degree">High School Diploma</div>
+              <span class="edu-badge">High School</span>
+            </div>
+            <div class="edu-meta-row">
+              <span class="edu-school">Verslunarskóli Íslands</span>
+              <span class="edu-sep">·</span>
+              <span class="edu-year">2004 — 2008</span>
+              <span class="edu-sep">·</span>
+              <span class="edu-year">Reykjavík</span>
+            </div>
+            <p class="edu-detail">Completed secondary education at Verslunarskóli Íslands — one of Iceland's most respected institutions — with a focus on commerce and economics, establishing the academic foundation for subsequent university studies in both business and technology.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="lang-section-label">Languages</div>
+      <div class="lang-list">
+        <div class="lang-item">
+          <div class="lang-flag">🇮🇸</div>
+          <div class="lang-name">Icelandic</div>
+          <div class="lang-level">Native or bilingual</div>
+          <div class="lang-bar"><div class="lang-fill" data-width="100%"></div></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-flag">🇬🇧</div>
+          <div class="lang-name">English</div>
+          <div class="lang-level">Native or bilingual</div>
+          <div class="lang-bar"><div class="lang-fill" data-width="100%"></div></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-flag">🇸🇪</div>
+          <div class="lang-name">Swedish</div>
+          <div class="lang-level">Professional proficiency</div>
+          <div class="lang-bar"><div class="lang-fill" data-width="70%"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERESTS -->
+  <section id="interests">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">04</span>
+        <h2 class="section-title">Interests &amp; Values</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value">
+          <div class="value-top">
+            <span class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="3"/><path d="M3 20v-1a6 6 0 0 1 12 0v1"/><circle cx="17" cy="9" r="2.5"/><path d="M16 20h5v-.5a4.5 4.5 0 0 0-6.2-4.2"/></svg></span>
+            <span class="value-num">01</span>
+          </div>
+          <div class="value-title">Family &amp; Friends</div>
+          <p class="value-desc">A family man and father of three. Time with my family and close friends keeps me grounded, and it is what everything else is built around.</p>
+          <div class="value-tags">Family · Friendship · Community</div>
+        </div>
+        <div class="value">
+          <div class="value-top">
+            <span class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span>
+            <span class="value-num">02</span>
+          </div>
+          <div class="value-title">Sports &amp; Active Lifestyle</div>
+          <p class="value-desc">Staying active is how I recharge. I care about overall health and spend as much time outdoors as I can, whether on the football pitch or the golf course.</p>
+          <div class="value-tags">Golf · Football · Outdoors · Wellbeing</div>
+        </div>
+        <div class="value">
+          <div class="value-top">
+            <span class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1.5"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/></svg></span>
+            <span class="value-num">03</span>
+          </div>
+          <div class="value-title">Science &amp; Technology</div>
+          <p class="value-desc">Curious about how things work and how technology can solve real problems, from platform engineering to AI and whatever comes next.</p>
+          <div class="value-tags">AI · Innovation · Lifelong learning</div>
+        </div>
+        <div class="value">
+          <div class="value-top">
+            <span class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span>
+            <span class="value-num">04</span>
+          </div>
+          <div class="value-title">Optimistic Outlook</div>
+          <p class="value-desc">I approach life and work with optimism: challenges are opportunities, and the best is usually still ahead.</p>
+          <div class="value-tags">Positivity · Growth mindset · Resilience</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">05</span>
+        <h2 class="section-title">Contact</h2>
+      </div>
+      <p class="contact-intro">
+        Open to new opportunities<br>and interesting conversations.
+      </p>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/axellarusson/" target="_blank" class="contact-link">
+          <span class="contact-link-label">LinkedIn</span>
+          <span class="contact-link-value">linkedin.com/in/axellarusson</span>
+          <span class="contact-link-arrow">↗</span>
+        </a>
+        <a href="mailto:axelminn@gmail.com" class="contact-link">
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-value">axelminn@gmail.com</span>
+          <span class="contact-link-arrow">↗</span>
+        </a>
+        <div class="contact-link" style="cursor:default;">
+          <span class="contact-link-label">Location</span>
+          <span class="contact-link-value">Greater Stockholm, Sweden</span>
+          <span class="contact-link-arrow">📍</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <span class="footer-copy">© 2026 Axel Lárusson</span>
+      <span class="footer-copy">Stockholm, Sweden</span>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <script>
+    // ── Dark mode ──
+    const html = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const icon = document.getElementById('themeIcon');
+    const label = document.getElementById('themeLabel');
+
+    const saved = localStorage.getItem('theme');
+    if (saved) applyTheme(saved);
+    else if (window.matchMedia('(prefers-color-scheme: dark)').matches) applyTheme('dark');
+
+    function applyTheme(theme) {
+      html.setAttribute('data-theme', theme);
+      icon.textContent  = theme === 'dark' ? '☀️' : '🌙';
+      label.textContent = theme === 'dark' ? 'Light' : 'Dark';
+      localStorage.setItem('theme', theme);
+    }
+
+    btn.addEventListener('click', () => {
+      applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+
+    // ── Skill bars ──
+    const skillObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('.skill-fill').forEach(b => { b.style.width = b.dataset.width; });
+          skillObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.skills-grid').forEach(el => skillObs.observe(el));
+
+    // ── Experience fade-in ──
+    const expObs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          expObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.exp-item').forEach(el => expObs.observe(el));
+
+    // Education fade-in
+    const eduObs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 100);
+          eduObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.edu-item').forEach(el => eduObs.observe(el));
+
+    // Language bars
+    const langObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('.lang-fill').forEach(b => { b.style.width = b.dataset.width; });
+          langObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.lang-list').forEach(el => langObs.observe(el));
+
+    // ── Active nav ──
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let cur = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 90) cur = s.id; });
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+      });
+      // back to top
+      document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+
+    // ── Back to top ──
+    document.getElementById('backToTop').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+  </script>
+</body>
+</html>
