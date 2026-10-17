@@ -9,7 +9,7 @@ Axel Lárusson's personal website and CV (infrastructure engineer). It is a stat
 
 ## Page structure
 
-The sections, in order, are `#hero`, `#currently`, `#experience`, `#skills`, `#education`, `#interests` and `#contact`, followed by a `<footer>`. The fixed `<nav>` has the "AL." logo (links to `#hero`), the links Now (`#currently`), Experience, Skills, Education and Contact, and the theme toggle. `#interests` is a section but has no nav link at the moment. The scroll handler highlights the nav link for the section in view, so when you add, rename or remove a section, update the nav links to match.
+The sections, in order, are `#hero`, `#currently`, `#experience`, `#skills`, `#education`, `#interests` and `#contact`, followed by a `<footer>`. The fixed `<nav>` has the "AL." logo (links to `#hero`), the links Now (`#currently`), Experience, Skills, Education, Interests (`#interests`) and Contact, and the theme toggle. The nav links are hidden below 640px. The scroll handler highlights the nav link for the section in view, so when you add, rename or remove a section, update the nav links to match.
 
 ## Styling conventions
 
